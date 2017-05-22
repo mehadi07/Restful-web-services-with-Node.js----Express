@@ -1,5 +1,4 @@
 var express = require('express');
-
 var app = express();
 
 app.listen(3000, function(){
@@ -7,12 +6,13 @@ app.listen(3000, function(){
 });
 
 // creating route
-
 var moviesRouter = express.Router();
 
 moviesRouter.route('')
-.get(function(req, res){
-    res.send('List of Movies');
-});
+    .get(function (req, res) {
+        res.send('List of Movies');
+    });
+
+
 
 app.use('/movies', moviesRouter);
