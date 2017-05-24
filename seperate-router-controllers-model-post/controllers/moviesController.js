@@ -1,8 +1,8 @@
-var movie = require('./../models/movieModel');
+var Movie = require('./../models/movieModel');
 
 
 var get = function (req, res) {
-    movie.find(function (err, movies) {
+    Movie.find(function (err, movies) {
         if (err) {
             res.send(500);
             res.send("Internal Server Error");
@@ -10,7 +10,7 @@ var get = function (req, res) {
             res.status(200);
             res.send(movies);
         }
-    })
+    });
 };
 
 var add = function (req, res) {
@@ -24,6 +24,18 @@ var add = function (req, res) {
             res.status(201);
             res.send(movie);
         }
+    });
+};
+
+var getById = function(req, res){
+    Movie.findById(req.params.id, function(err, movie){
+        if(err){
+            res.status(404);
+            res.send("Not Found");
+        } else {
+            res.status(200);
+            res.send(movie);
+        }
     })
 };
 
@@ -34,5 +46,6 @@ var add = function (req, res) {
 
 module.exports = {
     add: add,
-    get: get
+    get: get,
+    getById: getById
 };
