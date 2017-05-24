@@ -27,9 +27,9 @@ var add = function (req, res) {
     });
 };
 
-var getById = function(req, res){
-    Movie.findById(req.params.id, function(err, movie){
-        if(err){
+var getById = function (req, res) {
+    Movie.findById(req.params.id, function (err, movie) {
+        if (err) {
             res.status(404);
             res.send("Not Found");
         } else {
@@ -37,6 +37,30 @@ var getById = function(req, res){
             res.send(movie);
         }
     })
+};
+
+var update = function (req, res) {
+    Movie.findById(req.params.id, function (err, movie) {
+        if (err) {
+            res.status(404);
+            res.send("Not Found");
+        } else {
+            movie.title = req.body.title;
+            movie.genre = req.body.genre;
+            movie.rating = req.body.rating;
+            movie.isReleased = req.body.isReleased;
+
+            movie.save(function (err) {
+                if (!err) {
+                    res.status(200);
+                    res.send(movie);
+                } else {
+                    res.status(500);
+                    res.send("Failed");
+                }
+            })
+        }
+    });
 };
 
 //module.exports.get = get;
