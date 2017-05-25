@@ -1,5 +1,6 @@
 var express = require('express');
-var moviesController = require('./../controllers/moviesController');
+var Movie = require('./../models/movieModel');
+var moviesController = require('./../controllers/moviesController')(Movie);
 
 var moviesRouter = express.Router();
 
